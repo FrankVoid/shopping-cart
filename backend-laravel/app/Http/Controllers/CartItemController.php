@@ -13,7 +13,8 @@ class CartItemController extends Controller
      */
     public function index()
     {
-        //
+        $cartItem = CartItem::all();
+        return response()->json($cartItem,200);
     }
 
     /**
@@ -21,7 +22,8 @@ class CartItemController extends Controller
      */
     public function store(StoreCartItemRequest $request)
     {
-        //
+        $cartItem = CartItem::created($request->validated());
+        return response()->json($cartItem,201);
     }
 
     /**
@@ -29,7 +31,7 @@ class CartItemController extends Controller
      */
     public function show(CartItem $cartItem)
     {
-        //
+        return response()->json($cartItem,200);
     }
 
     /**
@@ -37,7 +39,8 @@ class CartItemController extends Controller
      */
     public function update(UpdateCartItemRequest $request, CartItem $cartItem)
     {
-        //
+        $cartItem->update($request->validated());
+        return response()->json($cartItem,200);
     }
 
     /**
@@ -45,6 +48,7 @@ class CartItemController extends Controller
      */
     public function destroy(CartItem $cartItem)
     {
-        //
+        $cartItem->delete();
+        return response()->json('CartItem Deleted',200);
     }
 }
