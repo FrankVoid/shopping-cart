@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
@@ -13,3 +14,4 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource('items',[ItemController::class]);
 Route::apiResource('customers',[CustomerController::class]);
+Route::apiResource('carts',[CartController::class]);
