@@ -11,7 +11,7 @@ class ShippingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class ShippingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'zip' => 'required|integer|min:20000|max:90000',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'zip.required' => 'Zip code is required',
+            'zip.integer' => 'Zip code must be an integer',
+            'zip.min' => 'Zip code must be at least 20000',
+            'zip.max' => 'Zip code must be at most 90000',
         ];
     }
 }
