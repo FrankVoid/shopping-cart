@@ -13,7 +13,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $item = Item::all();
+        return response()->json($item,200);
     }
 
     /**
@@ -21,7 +22,8 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        //
+        $item = Item::created($request->validated());
+        return response()->json($item,201);
     }
 
     /**
@@ -29,7 +31,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return response()->json($item,200);
     }
 
     /**
@@ -37,7 +39,8 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        $item->update($request->validated());
+        return response()->json($item,200);
     }
 
     /**
@@ -45,6 +48,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return response()->json('Item Deleted',200);
     }
 }
