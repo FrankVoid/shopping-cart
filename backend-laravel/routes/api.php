@@ -15,8 +15,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('items',[ItemController::class]);
-Route::apiResource('customers',[CustomerController::class]);
-Route::apiResource('carts',[CartController::class]);
-Route::apiResource('addresses',[AddressController::class]);
-Route::apiResource('cartitems',[CartItemController::class]);
+Route::apiResource('items', ItemController::class);
+Route::apiResource('customers', CustomerController::class);
+Route::apiResource('carts', CartController::class);
+Route::apiResource('addresses', AddressController::class);
+Route::apiResource('cartitems', CartItemController::class);
