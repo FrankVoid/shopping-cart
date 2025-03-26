@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemController;
@@ -15,3 +16,4 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('items',[ItemController::class]);
 Route::apiResource('customers',[CustomerController::class]);
 Route::apiResource('carts',[CartController::class]);
+Route::apiResource('addresses',[AddressController::class]);
