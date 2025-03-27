@@ -1,7 +1,7 @@
 import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import pluginVitest from '@vitest/eslint-plugin'
 
 export default [
   {
@@ -24,5 +24,9 @@ export default [
 
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
-  skipFormatting,
+  
+  {
+    ...pluginVitest.configs.recommended,
+    files: ['src/**/__tests__/*'],
+  },
 ]
