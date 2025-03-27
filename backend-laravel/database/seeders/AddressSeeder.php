@@ -16,12 +16,22 @@ class AddressSeeder extends Seeder
     public function run(): void
     {
         $address = new Address();
+        $address->line_1 = ' ';
+        $address->line_2 = ' ';
+        $address->city = ' ';
+        $address->state = ' ';
+        $address->zip = ' ';
+        $address->customer_id = 1;
+        $address->status = 'active';
+        $address->save();
+
+        $address = new Address();
         $address->line_1 = '3645 LA-18';
         $address->line_2 = '';
         $address->city = 'Vacherie';
         $address->state = 'Louisiana';
         $address->zip = '70090';
-        $address->customer_id = 1;
+        $address->customer_id = 2;
         $address->status = 'active';
         $address->save();
 
@@ -31,7 +41,7 @@ class AddressSeeder extends Seeder
         $address->city = 'Sargent';
         $address->state = 'Nebraska';
         $address->zip = '68874';
-        $address->customer_id = 1;
+        $address->customer_id = 2;
         $address->status = 'active';
         $address->save();
 
@@ -41,7 +51,7 @@ class AddressSeeder extends Seeder
         $address->city = ' Novi';
         $address->state = 'Michigan';
         $address->zip = '48377';
-        $address->customer_id = 2;
+        $address->customer_id = 3;
         $address->status = 'active';
         $address->save();
 
@@ -51,7 +61,7 @@ class AddressSeeder extends Seeder
         $address->city = 'Salt Lake City';
         $address->state = 'Utah';
         $address->zip = '84150';
-        $address->customer_id = 2;
+        $address->customer_id = 3;
         $address->status = 'active';
         $address->save();
 

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers');
-            $table->foreignId('address_id')->constrained('addresses');
+            $table->foreignId('customer_id')->constrained('customers')->default(1);
+            $table->foreignId('address_id')->constrained('addresses')->default(1);
             $table->enum('status', ['active', 'completed', 'cancelled'])->default('active');
             $table->decimal('total_order_price', 10, 2)->nullable()->default(0,0);
             $table->decimal('shipping_cost', 10,2)->nullable()->default(0,0);
