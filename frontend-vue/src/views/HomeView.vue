@@ -9,7 +9,7 @@ const cartId = ref(null);
 const getItems = async () => {
   try {
     const response = await axios.get('http://127.0.0.1:8000/api/items/');
-    items.value = response.data;
+    items.value = response.data.filter(item => item.status === 'active');
   } catch (error) {
     console.log(error);
   }
@@ -53,9 +53,16 @@ const addItems = async (itemId) => {
     await createCart();
   }
 
+
   try {
     const response = await axios.get(`http://127.0.0.1:8000/api/cartitems/?cart_id=${cartId.value}`);
     console.log('Cart items fetched:', response.data);
+
+    const item = await checkItemStock(itemId);
+    if (item.quantity < 1) {
+      console.log('out of stock');
+      return;
+    }
 
     const existingItem = response.data.find(
       item => item.cart_id == cartId.value && item.item_id == itemId
@@ -65,10 +72,14 @@ const addItems = async (itemId) => {
       console.log('Item already in cart:', existingItem);
       const newQuantity = existingItem.quantity + 1;
 
+
+
       await axios.put(`http://127.0.0.1:8000/api/cartitems/${existingItem.id}`, {
         quantity: newQuantity
       });
-
+      const updatedQuantity = item.quantity - 1;
+      await updateItemStock(itemId, updatedQuantity);
+      await getItems();
       console.log(`Quantity updated for item ${itemId}: ${newQuantity}`);
     } else {
       const response = await axios.post("http://127.0.0.1:8000/api/cartitems/", {
@@ -77,15 +88,40 @@ const addItems = async (itemId) => {
         quantity: 1,
         price_at_purchase: 0.00
       });
-
+      const updatedQuantity = item.quantity - 1;
+      await updateItemStock(itemId, updatedQuantity);
+      await getItems();
       console.log('Item added to cart:', response.data);
     }
+
+
   } catch (error) {
     console.log('Error adding item to cart:', error);
   }
 };
 
+const checkItemStock = async (itemId) => {
+  try {
+    const response = await axios.get(`http://127.0.0.1:8000/api/items/${itemId}/`);
+    return response.data;
+  } catch (error) {
+    console.error('Error checking item stock:', error);
+    return null;
+  }
+};
 
+const updateItemStock = async (itemId, updatedQuantity) => {
+  try {
+    const response = await axios.put(`http://127.0.0.1:8000/api/items/${itemId}/`, {
+      quantity: updatedQuantity,
+      status: updatedQuantity > 0 ? 'active' : 'inactive'
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating item stock:', error);
+    throw error;
+  }
+};
 
 onMounted(() => {
   getItems();
