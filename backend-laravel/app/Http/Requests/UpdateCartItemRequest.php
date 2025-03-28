@@ -32,10 +32,13 @@ class UpdateCartItemRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'first_name.required' => 'The first name is required.',
-            'first_name.max' => 'The first name must not exceed 45 characters.',
-            'last_name.required' => 'The last name is required.',
-            'last_name.max' => 'The last name must not exceed 45 characters.',
+            'cart_id.exists' => 'The selected cart does not exist.',
+            'item_id.exists' => 'The selected item does not exist.',
+            'quantity.required' => 'The quantity field is required.',
+            'quantity.integer' => 'The quantity must be an integer.',
+            'quantity.min' => 'The quantity must be at least 1.',
+            'price_at_purchase.numeric' => 'The price at purchase must be a number.',
+            'price_at_purchase.min' => 'The price at purchase must be at least 0.',
         ];
     }
 }
