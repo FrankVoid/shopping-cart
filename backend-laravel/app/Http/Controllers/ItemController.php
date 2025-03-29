@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+//changed created and updated to create and update
 use App\Models\Item;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;

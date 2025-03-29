@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+//changed created and updated to create and update
 use App\Models\Address;
 use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
