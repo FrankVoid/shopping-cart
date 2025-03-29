@@ -22,7 +22,7 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        $address = Address::created($request->validated());
+        $address = Address::create($request->validated());
         return response()->json($address,201);
     }
 
@@ -39,7 +39,7 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, Address $address)
     {
-        $address = Address::updated($request->validated());
+        $address = Address::update($request->validated());
         return response()->json($address,201);
     }
 

@@ -22,7 +22,7 @@ class CartItemController extends Controller
      */
     public function store(StoreCartItemRequest $request)
     {
-        $cartItem = CartItem::created($request->validated());
+        $cartItem = CartItem::create($request->validated());
         return response()->json($cartItem,201);
     }
 

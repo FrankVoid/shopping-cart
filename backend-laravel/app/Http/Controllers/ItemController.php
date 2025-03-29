@@ -22,7 +22,7 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        $item = Item::created($request->validated());
+        $item = Item::create($request->validated());
         return response()->json($item,201);
     }
 
