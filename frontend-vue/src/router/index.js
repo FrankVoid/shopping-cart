@@ -20,7 +20,6 @@ const router = createRouter({
       path: '/checkout',
       name: 'checkout',
       component: CheckoutView,
-      props: route => ({ cartDetails: JSON.parse(route.params.cartDetails) })
     },
     {
       path: '/payment',

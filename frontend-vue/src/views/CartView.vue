@@ -1,5 +1,5 @@
 <script setup>
-import {ref, onMounted, nextTick } from 'vue';
+import {ref, onMounted} from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
@@ -57,9 +57,9 @@ const cartDetails = async() =>{
     console.log(cartDetails);
     console.log(cartItemsDetails.value, 'cartItemsDetails');
 
-    totalWithoutTax.value = cartDetails.reduce((total, item) => total + item.total, 0);
+    totalWithoutTax.value = parseFloat(cartDetails.reduce((total, item) => total + item.total, 0).toFixed(2));
 
-    totalWithTax.value = totalWithoutTax.value * 1.16;
+    totalWithTax.value = parseFloat((totalWithoutTax.value * 1.16).toFixed(2));
 
     totalWithoutTax.value = parseFloat(totalWithoutTax.value.toFixed(2));
     totalWithTax.value = parseFloat((totalWithoutTax.value * 1.16).toFixed(2));
@@ -76,20 +76,30 @@ const cartDetails = async() =>{
 };
 
 const checkout = async () => {
+
+  try {
+    if (!cartItemsDetails.value || cartItemsDetails.value.length === 0) {
+    console.log('empty data');
+    return;
+  }
   const checkoutData = {
-    items: JSON.stringify(cartItemsDetails.value),
+    items: cartItemsDetails.value,
     subtotal: totalWithoutTax.value || 0,
     total: totalWithTax.value || 0,
   };
-  console.log("CheckoutData:", checkoutData);
-    await nextTick();
-  router.push({
-    name: 'checkout',
+
+  console.log('CheckoutData:', checkoutData);
+
+
+  await router.push({
+    path: '/checkout',
     query: {
       data: JSON.stringify(checkoutData)
     }
   });
-
+  } catch (error) {
+    console.log('error in checkout', error);
+  }
 };
 
 
@@ -98,6 +108,7 @@ onMounted(() => {
   ActiveCart();
   getCartItemsId();
   cartDetails();
+
 });
 </script>
 
@@ -108,16 +119,15 @@ onMounted(() => {
     <table border="1">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Cantidad</th>
-          <th>Precio Unitario</th>
+
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
           <th>Total</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in cartItemsDetails" :key="item.id">
-          <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.quantity }}</td>
           <td>${{ item.price.toFixed(2) }}</td>
@@ -142,7 +152,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.checkout-button {
+.checkout-btn {
   background-color: #4CAF50;
   color: white;
   padding: 12px 20px;
