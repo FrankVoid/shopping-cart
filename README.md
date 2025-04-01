@@ -65,3 +65,36 @@ Controllers
 - POST   /api/shipping
 - POST   /api/payment
 
+# Frontend(VueJs)
+
+Vuejs
+ - Composition API
+ - Axios for API Call
+ - Vue Router for navigation
+ - Error Handling
+ - 
+# Completed Features
+
+- Item functionality (HomeView)
+    - Product listing
+    - Stock updating when a product is added to cart
+    - API calls
+- Cart functionality (partially implemented)
+    - API calls
+    - Add Items when user click add in ItemView (HomeView)
+    - Update quantities
+    - Real-time calculations (Subtotal, Taxes, Total)
+    - sending data to Checkout (Router.push Query)
+- Checkout process(Eartly implemented)
+    - Customer information form
+    - Reciving data from CartView (Router.push Query)
+    - API calls
+# Incomplete Features
+- PaymetView.
+- Shipping Calculation
+- Storing address, customer
+- Update status in Items, Cart, CartItem
+- delete productos from cart and update items
+- reduce the quantity of items in cart
+
+
