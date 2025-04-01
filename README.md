@@ -72,7 +72,7 @@ Vuejs
  - Axios for API Call
  - Vue Router for navigation
  - Error Handling
- - 
+
 # Completed Features
 
 - Item functionality (HomeView)
